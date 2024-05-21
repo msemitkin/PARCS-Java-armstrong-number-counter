@@ -1,5 +1,6 @@
 package com.github.msemitkin;
 
+import org.apache.commons.lang3.time.StopWatch;
 import parcs.AMInfo;
 import parcs.channel;
 import parcs.point;
@@ -15,20 +16,20 @@ public class Main {
         System.out.println("jarPath = " + jarPath);
         int numberOfWorkers = Integer.parseInt(args[1]);
         System.out.println("numberOfWorkers = " + numberOfWorkers);
-        long range = 50000000;
+        long range = Long.parseLong(args[2]);
         System.out.println("range = " + range);
 
         task task = new task();
         task.addJarFile(jarPath);
 
-        long start = System.nanoTime();
+        StopWatch stopwatch = StopWatch.createStarted();
 
         long totalCount = getTotalCount(new AMInfo(task, null), range, numberOfWorkers);
 
-        long end = System.nanoTime();
+        stopwatch.stop();
 
-        System.out.println("Count of Armstrong Numbers in range [1, " + range + "] = " + totalCount);
-        System.out.println("time = " + ((end - start) / 1000000) + "ms");
+        System.out.println("Number of Armstrong numbers in range [1, " + range + "] = " + totalCount);
+        System.out.println("duration = " + stopwatch);
         task.end();
     }
 

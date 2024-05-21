@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     implementation(files("libs/parcs.jar"))
+    implementation("org.apache.commons:commons-lang3:3.14.0")
 }
 
 tasks.jar {
